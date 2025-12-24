@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HELP IMPERIA - Elektron yordam va raqamli xizmatlar markazi.">
+<meta name="keywords" content="help imperia, elektron yordam, prezentatsiya, html darslari">
+<meta name="author" content="SAMIR SITE">
+    <title>HELP IMPERIA | Star Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-color: #00d2ff;
+            --accent-color: #9d50bb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        /* KREATIV FON - STARFIELD */
+        body {
+            background: #000;
+            margin: 0;
+            overflow-x: hidden;
+            color: white;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* TEPADAGI RASM - KICHRAYTIRILGAN VA TINIQ */
+        header {
+            height: 45vh; /* Bo'yi kichraytirildi */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), 
+                        url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+            border-bottom: 2px solid var(--main-color);
+        }
+
+        header h1 { 
+            font-size: 3.5rem; 
+            letter-spacing: 8px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            text-shadow: 0 0 20px rgba(0,210,255,0.7);
+        }
+
+        /* KARTALAR */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px 5%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px 20px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: var(--main-color);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .card i { 
+            font-size: 3.5rem; 
+            margin-bottom: 15px; 
+            display: block; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Bosilganda emoji sakrashi */
+        .card.active i {
+            animation: bounceEmoji 0.6s ease;
+        }
+
+        @keyframes bounceEmoji {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.6) rotate(10deg); }
+        }
+
+        /* FORMA */
+        .contact-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, var(--main-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { filter: brightness(1.2); }
+
+        .tg-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #fff;
+            color: #0088cc;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <canvas id="starfield"></canvas>
+
+    <header>
+        <h1>HELP IMPERIA</h1>
+        <p style="letter-spacing: 3px; font-weight: 300;">SPACE-TECH ASSISTANCE</p>
+    </header>
+
+    <div class="services-grid">
+        <div class="card" onclick="selectService(this, 'Prezentatsiya')"><i>📊</i><h3>Prezentatsiya</h3><p>Professional dizayn.</p></div>
+        <div class="card" onclick="selectService(this, 'Ish O\'rinlari')"><i>💼</i><h3>Ish O'rinlari</h3><p>Vakansiyalar olami.</p></div>
+        <div class="card" onclick="selectService(this, 'HTML Darslari')"><i>💻</i><h3>HTML Darslari</h3><p>Kodlashni o'rganing.</p></div>
+        <div class="card" onclick="selectService(this, 'O\'qishga yordam')"><i>🎓</i><h3>O'qishga Yordam</h3><p>Talabalar uchun.</p></div>
+        <div class="card" onclick="selectService(this, 'Boshqa yordamlar')"><i>➕</i><h3>Boshqa</h3><p>Maxsus xizmatlar.</p></div>
+    </div>
+
+    <div class="contact-section" id="contact">
+        <h2 style="text-align: center; margin-bottom: 25px;">BUYURTMA BERISH</h2>
+        <form id="helpForm">
+            <input type="text" id="name" placeholder="Ismingiz" required>
+            <select id="service">
+                <option value="Boshqa">Xizmatni tanlang</option>
+                <option value="Prezentatsiya">Prezentatsiya</option>
+                <option value="Ish">Ish o'rinlari</option>
+                <option value="Dasturlash">HTML Darslar</option>
+                <option value="O'qish">O'qishga yordam</option>
+            </select>
+            <textarea id="msg" rows="4" placeholder="Sizga qanday yordam kerak?" required></textarea>
+            <button type="submit">TELEGRAMGA YUBORISH</button>
+        </form>
+    </div>
+
+    <a href="https://t.me/samir_f4" class="tg-float">TELEGRAM</a>
+
+    <footer>&copy; 2025 HELP IMPERIA</footer>
+
+    <script>
+        // Yulduzlar uchishi (Starfield) JavaScript
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        const numStars = 400;
+        let w, h;
+
+        function init() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < numStars; i++) {
+                stars.push({
+                    x: Math.random() * w - w/2,
+                    y: Math.random() * h - h/2,
+                    z: Math.random() * w,
+                    o: Math.random()
+                });
+            }
+        }
+
+        function draw() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, w, h);
+            ctx.translate(w/2, h/2);
+
+            for (let i = 0; i < numStars; i++) {
+                let s = stars[i];
+                s.z -= 5; // Tezlik (uchib kelish)
+                if (s.z <= 0) s.z = w;
+
+                let x = s.x * (w / s.z);
+                let y = s.y * (w / s.z);
+                let r = 1.5 * (w / s.z);
+
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(255, 255, 255, ${1 - s.z/w})`;
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        draw();
+
+        // Kartochka funksiyasi
+        function selectService(el, s) {
+            el.classList.add('active');
+            setTimeout(() => el.classList.remove('active'), 600);
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('msg').value = "Assalomu alaykum, menga " + s + " bo'yicha yordam kerak.";
+        }
+
+        // Telegram form yuborish
+        document.getElementById('helpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const token = "8401392279:AAG7NH-W6niq31d4BLwh3DaxT3tqxcebTW0";
+            const chat_id = "5588598964";
+            
+            const name = document.getElementById('name').value;
+            const service = document.getElementById('service').value;
+            const msg = document.getElementById('msg').value;
+            
+            const text = `🚀 *HELP IMPERIA - YANGI BUYURTMA*%0A👤 *Mijoz:* ${name}%0A🛠 *Xizmat:* ${service}%0A📝 *Xabar:* ${msg}`;
+            
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}&parse_mode=Markdown`)
+            .then(res => {
+                if(res.ok) {
+                    alert("Xabaringiz muvaffaqiyatli yuborildi! ✅");
+                    this.reset();
+                } else {
+                    alert("Xatolik yuz berdi. Iltimos, keyinroq urinib ko'ring! ❌");
+                }
+            })
+            .catch(err => {
+                alert("Internet ulanishida xatolik! 🌐");
+            });
+        });
+    </script>
+</body>
+</html>
